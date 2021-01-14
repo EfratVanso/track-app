@@ -18,4 +18,9 @@ export default function SignUpScreen({ navigation }) {
     </View>
   );
 }
+SignUpScreen.navigationOptions = () => {
+    return {
+      headerShown: false,
+    };
+  };
 const styles = StyleSheet.create({});
