@@ -13,6 +13,7 @@ import SignUpScreen from "./src/screens/SignUpScreen";
 import TrackCreateScreen from "./src/screens/TrackCreateScreen";
 import TrackDetailScreen from "./src/screens/TrackDetailScreen";
 import TrackListScreen from "./src/screens/TrackListScreen";
+import { Provider as AuthProvider } from "./src/context/AuthContext";
 
 const switchNavigator = //nested navigation
 createSwitchNavigator({
@@ -32,26 +33,11 @@ createSwitchNavigator({
     }),
 });
 
-export default createAppContainer(switchNavigator);
-
-// import { StatusBar } from 'expo-status-bar';
-// import React from 'react';
-// import { StyleSheet, Text, View } from 'react-native';
-
-// export default function App() {
-//   return (
-//     <View style={styles.container}>
-//       <Text>Open up App.js to start working on your app!</Text>
-//       <StatusBar style="auto" />
-//     </View>
-//   );
-// }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: '#fff',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   },
-// });
+const App = createAppContainer(switchNavigator);
+export default () => {
+  return (
+    <AuthProvider>
+      <App />
+    </AuthProvider>
+  );
+};
