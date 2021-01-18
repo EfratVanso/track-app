@@ -14,6 +14,7 @@ import TrackCreateScreen from "./src/screens/TrackCreateScreen";
 import TrackDetailScreen from "./src/screens/TrackDetailScreen";
 import TrackListScreen from "./src/screens/TrackListScreen";
 import { Provider as AuthProvider } from "./src/context/AuthContext";
+import { setNavigator } from "./src/navigationRef";
 
 const switchNavigator = //nested navigation
 createSwitchNavigator({
@@ -37,7 +38,11 @@ const App = createAppContainer(switchNavigator);
 export default () => {
   return (
     <AuthProvider>
-      <App />
+      <App 
+      ref={(navigator)=>{ //export navigation option to another files except the components
+        setNavigator(navigator);
+      }} 
+      />
     </AuthProvider>
   );
 };
