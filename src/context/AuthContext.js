@@ -7,9 +7,9 @@ import { navigate } from '../navigationRef';
 const authReducer = (state, action) => {
   switch (action.type) {
     case 'signup':
-        return {errorMsg: '', token: action.payload}
+        return {errorMessage: '', token: action.payload}
      case 'add_error':
-          return {...state, errorMsg: action.payload}
+          return {...state, errorMessage: action.payload}
     default:
       return state;
   }
@@ -42,5 +42,5 @@ const signout = (dispatch) => {
 export const { Provider, Context } = createDataContext(
   authReducer,
   { signin, signout, signup },
-  { token: null, errorMsg:'' }
+  { token: null, errorMessage:'' }
 );
