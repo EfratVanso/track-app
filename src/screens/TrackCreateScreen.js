@@ -4,6 +4,7 @@ import Map from '../components/Map'
 import { Text } from 'react-native-elements'
 import { SafeAreaView } from 'react-navigation'
 import {requestPermissionsAsync} from 'expo-location'
+import '../_mockLocation'
 
 export default function TrackCreateScreen() {
     const [err, setErr] = useState(null)
