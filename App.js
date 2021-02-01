@@ -14,7 +14,10 @@ import { Provider as AuthProvider } from "./src/context/AuthContext";
 import { Provider as LocationProvider } from "./src/context/LocationContext";
 import { setNavigator } from "./src/navigationRef";
 import ResolveAuthScreen from "./src/screens/ResolveAuthScreen";
-
+import { LogBox } from "react-native";
+LogBox.ignoreLogs([
+  "Your project is accessing the following APIs from a deprecated global rather than a module import: Constants (expo-constants).",
+]);
 const switchNavigator = createSwitchNavigator({ //nested navigation
   ResolveAuth: ResolveAuthScreen,
   loginFlow: createStackNavigator({

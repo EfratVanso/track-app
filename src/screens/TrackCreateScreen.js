@@ -1,12 +1,14 @@
-import React, {useEffect, useState} from 'react'
+//import '../_mockLocation'// fake location
+import React, {useEffect, useState, useContext} from 'react'
 import { View, StyleSheet } from 'react-native'
 import Map from '../components/Map'
 import { Text } from 'react-native-elements'
 import { SafeAreaView } from 'react-navigation'
 import {requestPermissionsAsync, watchPositionAsync, Accuracy} from 'expo-location'
-import '../_mockLocation'
+import { Context as LocationContext}  from '../context/LocationContext'
 
 export default function TrackCreateScreen() {
+    const {addLocation} = useContext(LocationContext)
     const [err, setErr] = useState(null)
 
     const startWatching = async () => {
@@ -20,7 +22,8 @@ export default function TrackCreateScreen() {
               timeInterval: 1000, // update location every 1 second
               distanceInterval: 10 //or every 10 meters 
           }, (location)=>{
-              console.log(location)
+              addLocation(location)
+              //console.log(location)
           })
         } catch (e) {
           setErr(e);
