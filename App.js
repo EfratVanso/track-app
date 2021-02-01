@@ -1,11 +1,8 @@
 import React from "react";
-import { createStackNavigator } from 'react-navigation-stack'
-import {  createBottomTabNavigator  } from 'react-navigation-tabs'
+import { createStackNavigator } from "react-navigation-stack";
+import { createBottomTabNavigator } from "react-navigation-tabs";
 
-import {
-  createAppContainer,
-  createSwitchNavigator,
-} from "react-navigation";
+import { createAppContainer, createSwitchNavigator } from "react-navigation";
 
 import AccountScreen from "./src/screens/AccountScreen";
 import SignInScreen from "./src/screens/SignInScreen";
@@ -14,37 +11,40 @@ import TrackCreateScreen from "./src/screens/TrackCreateScreen";
 import TrackDetailScreen from "./src/screens/TrackDetailScreen";
 import TrackListScreen from "./src/screens/TrackListScreen";
 import { Provider as AuthProvider } from "./src/context/AuthContext";
+import { Provider as LocationProvider } from "./src/context/LocationContext";
 import { setNavigator } from "./src/navigationRef";
 import ResolveAuthScreen from "./src/screens/ResolveAuthScreen";
 
-const switchNavigator = //nested navigation
-createSwitchNavigator({
-  ResolveAuth:ResolveAuthScreen,
-    loginFlow: createStackNavigator({
-      Signup: SignUpScreen,
-      Signin: SignInScreen,
+const switchNavigator = createSwitchNavigator({ //nested navigation
+  ResolveAuth: ResolveAuthScreen,
+  loginFlow: createStackNavigator({
+    Signup: SignUpScreen,
+    Signin: SignInScreen,
+  }),
+
+  mainFlow: createBottomTabNavigator({
+    trackListFlow: createStackNavigator({
+      TrackList: TrackListScreen,
+      TrackDetail: TrackDetailScreen,
     }),
 
-    mainFlow: createBottomTabNavigator({
-        trackListFlow: createStackNavigator({
-          TrackList: TrackListScreen,
-          TrackDetail: TrackDetailScreen,
-        }),
-
-        TrackCreate: TrackCreateScreen,
-        Account: AccountScreen,
-    }),
+    TrackCreate: TrackCreateScreen,
+    Account: AccountScreen,
+  }),
 });
 
 const App = createAppContainer(switchNavigator);
 export default () => {
   return (
-    <AuthProvider>
-      <App 
-      ref={(navigator)=>{ //export navigation option to another files except the components
-        setNavigator(navigator);
-      }} 
-      />
-    </AuthProvider>
+    <LocationProvider>
+      <AuthProvider>
+        <App
+          ref={(navigator) => {
+            //export navigation option to another files except the components
+            setNavigator(navigator);
+          }}
+        />
+      </AuthProvider>
+    </LocationProvider>
   );
 };
