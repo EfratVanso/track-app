@@ -1,4 +1,4 @@
-//import '../_mockLocation'// fake location
+import '../_mockLocation'// fake location
 import React, {useEffect, useState, useContext} from 'react'
 import { View, StyleSheet } from 'react-native'
 import Map from '../components/Map'
