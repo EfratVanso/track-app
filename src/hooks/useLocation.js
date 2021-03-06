@@ -38,7 +38,11 @@
               setSubscriber(null);
               console.log('removed')
             }
-          }, [shouldTrack]);
+            return ()=>{
+                if(subscriber){
+              subscriber.remove();  }
+            };
+          }, [shouldTrack, callback]);
         
           return [err];
         };

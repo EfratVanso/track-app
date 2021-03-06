@@ -22,9 +22,12 @@ const changeName = (dispatch) => (name) => {
 };
 const startRecording = (dispatch) => () => {
   dispatch({ action: "start_recording" });
+  console.log("start_recording");
+
 };
 const stopRecording = (dispatch) => () => {
   dispatch({ action: "stop_recording" });
+  console.log("stop_recording");
 };
 const addLocation = (dispatch) => (location, recording) => {
   dispatch({ type: "add_current_location", payload: location });
